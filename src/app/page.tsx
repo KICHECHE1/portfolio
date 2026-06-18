@@ -1,273 +1,234 @@
-"use client";
-
-import { useState } from "react";
 import {
+  ArrowRight,
   ArrowUpRight,
+  CheckCircle2,
   Code2,
-  Menu,
-  Palette,
-  Smartphone,
-  X,
+  Layout,
+  ShieldCheck,
 } from "lucide-react";
-
-const navigation = ["Home", "About", "Work", "Skills", "Contact"];
+import Link from "next/link";
+import { ProjectCard } from "@/components/project-card";
+import { Reveal } from "@/components/reveal";
+import { projects } from "@/lib/portfolio-data";
 
 const services = [
   {
-    icon: Palette,
-    title: "UI Design",
+    icon: Layout,
+    title: "Product & UI Design",
     description:
-      "Clean, intentional interfaces that balance personality with ease of use.",
+      "Clear user journeys, thoughtful visual systems, and interfaces that support real business goals.",
   },
   {
     icon: Code2,
-    title: "Web Development",
+    title: "Frontend Development",
     description:
-      "Fast, accessible websites built with modern frontend technologies.",
+      "Responsive, maintainable applications built with React, Next.js, TypeScript, and modern CSS.",
   },
   {
-    icon: Smartphone,
-    title: "Responsive Design",
+    icon: ShieldCheck,
+    title: "Quality & Accessibility",
     description:
-      "Thoughtful experiences that feel natural on every screen size.",
+      "Careful implementation with performance, accessibility, consistency, and long-term usability in mind.",
   },
 ];
 
-const projects = [
-  {
-    number: "01",
-    title: "Premium Landing Pages",
-    category: "Design & Development",
-    tone: "bg-[#d9d7cf]",
-  },
-  {
-    number: "02",
-    title: "Modern Web Experiences",
-    category: "Frontend Development",
-    tone: "bg-[#c9d0d1]",
-  },
-  {
-    number: "03",
-    title: "Responsive Interfaces",
-    category: "UI/UX Design",
-    tone: "bg-[#d8cfc8]",
-  },
-];
-
-export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <section id="home" className="relative h-screen overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_091828_e240eb17-6edc-4129-ad9d-98678e3fd238.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
-
-        <div className="relative h-full">
-          <div className="mx-auto flex h-full max-w-7xl flex-col px-8 py-6">
-            <nav className="relative z-20 flex items-center justify-between">
-              <a
-                href="#home"
-                className="text-2xl font-semibold text-gray-900 transition-colors hover:text-gray-700"
-              >
-                Juma Saidi
-              </a>
-
-              <div className="hidden items-center gap-8 md:flex">
-                {navigation.map((item) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-sm font-medium text-gray-900 transition-colors hover:text-gray-700"
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-
-              <button
-                type="button"
-                className="rounded-full p-2 text-gray-900 transition-colors hover:bg-white/40 hover:text-gray-700 md:hidden"
-                onClick={() => setIsMenuOpen((open) => !open)}
-                aria-expanded={isMenuOpen}
-                aria-controls="mobile-navigation"
-                aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-
-              {isMenuOpen && (
-                <div
-                  id="mobile-navigation"
-                  className="absolute left-0 right-0 top-14 rounded-2xl bg-white/95 p-3 shadow-xl backdrop-blur-md md:hidden"
-                >
-                  {navigation.map((item) => (
-                    <a
-                      key={item}
-                      href={`#${item.toLowerCase()}`}
-                      className="block rounded-xl px-4 py-3 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-100 hover:text-gray-700"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </nav>
-
-            <main className="flex flex-1 items-center justify-center">
-              <div className="-mt-80 flex flex-col items-center px-4 text-center">
-                <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-600">
-                  Frontend Developer &amp; Designer
-                </p>
-
-                <h1 className="flex flex-col items-center">
-                  <span className="text-6xl font-normal leading-none tracking-tighter text-gray-500 md:text-7xl lg:text-8xl">
-                    Thoughtful.
-                  </span>
-                  <span className="-mt-3 text-6xl font-normal leading-none tracking-tighter text-[#202A36] md:text-7xl lg:text-8xl">
-                    Digital.
-                  </span>
-                </h1>
-
-                <p className="mb-6 mt-6 max-w-2xl text-lg text-gray-600 md:text-xl">
-                  I build clean, responsive, and user-friendly web experiences
-                  that turn ideas into real digital products.
-                </p>
-
-                <div className="flex items-center justify-center gap-4">
-                  <a
-                    href="#work"
-                    className="rounded-full bg-gray-300 px-4 py-2 font-medium text-gray-800 transition-colors hover:bg-gray-400"
-                  >
-                    View My Work
-                  </a>
-                  <a
-                    href="#contact"
-                    className="rounded-full bg-[#202A36] px-4 py-2 font-medium text-white transition-colors hover:bg-[#1a2229]"
-                  >
-                    Contact Me
-                  </a>
-                </div>
-              </div>
-            </main>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" className="bg-[#f4f2ed] px-8 py-28 md:py-36">
-        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.7fr_1.3fr]">
-          <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
-            About me
-          </p>
+    <main className="bg-paper text-ink">
+      <section className="relative overflow-hidden border-b border-black/10 bg-white px-5 pb-20 pt-32 md:px-8 md:pb-28 md:pt-40">
+        <div className="professional-grid-light absolute inset-0" />
+        <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <h2 className="max-w-4xl text-4xl font-normal leading-tight tracking-tight text-[#202A36] md:text-6xl">
-              I turn ideas into digital experiences that feel clear, useful,
-              and distinctly human.
-            </h2>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-gray-600">
-              I’m Juma Saidi, a frontend developer and designer focused on
-              thoughtful interfaces and polished implementation. I enjoy the
-              space where strong visual design meets clean, responsive code.
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-medium text-muted shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              Available for freelance and contract work
+            </div>
+
+            <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-[-0.05em] text-ink sm:text-6xl md:text-7xl">
+              I design and build digital products that work.
+            </h1>
+
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-muted">
+              I&apos;m Juma Saidi, a frontend developer and UI designer helping
+              businesses turn ideas into clear, responsive, and reliable web
+              experiences.
             </p>
+
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link
+                href="/work"
+                className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-ink"
+              >
+                View my work <ArrowUpRight size={16} />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-lg border border-black/15 bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-surface"
+              >
+                Discuss a project
+              </Link>
+            </div>
+
+            <div className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-black/10 pt-7">
+              {[
+                ["Frontend", "Development"],
+                ["UI/UX", "Design"],
+                ["Remote", "Worldwide"],
+              ].map(([value, label]) => (
+                <div key={value}>
+                  <p className="text-sm font-semibold text-ink">{value}</p>
+                  <p className="mt-1 text-xs text-muted">{label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -inset-8 rounded-full bg-accent/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_24px_80px_rgb(var(--color-ink)/0.14)]">
+              <div className="flex h-12 items-center justify-between border-b border-black/10 bg-surface px-5">
+                <div className="flex gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+                </div>
+                <span className="text-[11px] font-medium text-muted">
+                  portfolio-preview.dev
+                </span>
+              </div>
+              <div className="p-5 sm:p-7">
+                <div className="rounded-xl bg-ink p-7 text-white sm:p-9">
+                  <p className="text-xs font-medium uppercase tracking-widest text-blue-300">
+                    Digital product partner
+                  </p>
+                  <h2 className="mt-5 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+                    From early idea to polished interface.
+                  </h2>
+                  <div className="mt-8 flex items-center gap-3">
+                    <span className="rounded-md bg-white px-3 py-2 text-xs font-semibold text-ink">
+                      Explore work
+                    </span>
+                    <span className="text-xs text-white/55">Built with care</span>
+                  </div>
+                </div>
+
+                <div className="mt-5 grid grid-cols-2 gap-4">
+                  <div className="rounded-xl border border-black/10 p-5">
+                    <p className="text-xs text-muted">Core stack</p>
+                    <p className="mt-2 font-semibold">Next.js + TypeScript</p>
+                    <div className="mt-5 h-1.5 rounded-full bg-surface">
+                      <div className="h-full w-4/5 rounded-full bg-accent" />
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-black/10 p-5">
+                    <p className="text-xs text-muted">Approach</p>
+                    <div className="mt-3 space-y-2">
+                      {["Accessible", "Responsive", "Maintainable"].map((item) => (
+                        <p key={item} className="flex items-center gap-2 text-xs font-medium">
+                          <CheckCircle2 size={13} className="text-emerald-600" />
+                          {item}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="work" className="bg-[#202A36] px-8 py-28 text-white md:py-36">
+      <section className="border-b border-black/10 bg-surface px-5 py-6 md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">
+            Technologies I work with
+          </p>
+          <div className="flex flex-wrap gap-x-7 gap-y-2 text-sm font-semibold text-ink/70">
+            {["Next.js", "React", "TypeScript", "Tailwind CSS", "Figma"].map(
+              (tool) => <span key={tool}>{tool}</span>,
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-24 md:px-8 md:py-32">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-400">
-                Selected work
-              </p>
-              <h2 className="text-4xl font-normal tracking-tight md:text-6xl">
-                Ideas, brought to life.
+          <Reveal>
+            <div className="grid gap-10 lg:grid-cols-[0.55fr_1.45fr]">
+              <div>
+                <p className="section-label">How I help</p>
+                <p className="mt-5 max-w-sm leading-7 text-muted">
+                  One partner across design and development means fewer gaps
+                  between the idea and the final product.
+                </p>
+              </div>
+              <h2 className="max-w-4xl text-4xl font-semibold leading-[1.1] tracking-[-0.04em] md:text-6xl">
+                Clear thinking, strong design, and dependable implementation.
               </h2>
             </div>
-            <p className="max-w-md text-gray-400">
-              A selection of the kinds of digital experiences I design and
-              develop.
-            </p>
-          </div>
+          </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {projects.map((project) => (
-              <article key={project.number} className="group">
-                <div
-                  className={`${project.tone} flex aspect-[4/5] items-start justify-end overflow-hidden rounded-3xl p-6`}
-                >
-                  <span className="rounded-full bg-white/70 px-4 py-2 text-sm font-medium text-[#202A36] backdrop-blur">
-                    {project.number}
+          <div className="mt-16 grid gap-5 md:grid-cols-3">
+            {services.map(({ icon: Icon, title, description }, index) => (
+              <Reveal key={title} delay={index * 80}>
+                <article className="h-full rounded-2xl border border-black/10 bg-white p-7 shadow-sm">
+                  <span className="grid h-11 w-11 place-items-center rounded-lg bg-accent-soft text-accent">
+                    <Icon size={21} />
                   </span>
-                </div>
-                <div className="mt-5 flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-xl font-medium">{project.title}</h3>
-                    <p className="mt-1 text-sm text-gray-400">
-                      {project.category}
-                    </p>
-                  </div>
-                  <ArrowUpRight className="text-gray-400 transition-colors group-hover:text-white" />
-                </div>
-              </article>
+                  <h3 className="mt-8 text-xl font-semibold">{title}</h3>
+                  <p className="mt-3 leading-7 text-muted">{description}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="skills" className="bg-white px-8 py-28 md:py-36">
+      <section className="border-y border-black/10 bg-white px-5 py-24 md:px-8 md:py-32">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-500">
-            What I do
-          </p>
-          <h2 className="mb-16 max-w-2xl text-4xl font-normal tracking-tight text-[#202A36] md:text-6xl">
-            Design that works. Code that lasts.
-          </h2>
+          <Reveal>
+            <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="section-label">Selected work</p>
+                <h2 className="mt-5 text-4xl font-semibold tracking-[-0.04em] md:text-6xl">
+                  Recent projects
+                </h2>
+              </div>
+              <Link
+                href="/work"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-accent"
+              >
+                See all projects
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </Reveal>
+          <Reveal>
+            <ProjectCard project={projects[0]} />
+          </Reveal>
+        </div>
+      </section>
 
-          <div className="grid gap-px overflow-hidden rounded-3xl bg-gray-200 md:grid-cols-3">
-            {services.map(({ icon: Icon, title, description }) => (
-              <article key={title} className="bg-[#f7f6f2] p-8 md:p-10">
-                <Icon className="mb-16 text-[#202A36]" size={30} strokeWidth={1.5} />
-                <h3 className="text-xl font-semibold text-[#202A36]">{title}</h3>
-                <p className="mt-3 leading-relaxed text-gray-600">{description}</p>
-              </article>
-            ))}
+      <section className="px-5 py-24 md:px-8 md:py-28">
+        <Reveal className="mx-auto max-w-7xl">
+          <div className="grid gap-10 rounded-2xl bg-ink p-8 text-white md:grid-cols-[1fr_auto] md:items-center md:p-12">
+            <div>
+              <p className="text-sm font-medium text-blue-300">
+                Have a project in mind?
+              </p>
+              <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight md:text-5xl">
+                Let&apos;s create a clear plan and build it properly.
+              </h2>
+            </div>
+            <Link
+              href="/contact"
+              className="inline-flex w-fit items-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-blue-50"
+            >
+              Contact me <ArrowUpRight size={16} />
+            </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
-
-      <section id="contact" className="bg-[#d9d7cf] px-8 py-28 md:py-36">
-        <div className="mx-auto flex max-w-7xl flex-col items-center text-center">
-          <p className="mb-5 text-sm font-semibold uppercase tracking-wider text-gray-600">
-            Have a project in mind?
-          </p>
-          <h2 className="max-w-4xl text-5xl font-normal leading-none tracking-tighter text-[#202A36] md:text-7xl lg:text-8xl">
-            Let’s make something remarkable.
-          </h2>
-          <a
-            href="mailto:"
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-[#202A36] px-6 py-3 font-medium text-white transition-colors hover:bg-[#1a2229]"
-          >
-            Start a conversation
-            <ArrowUpRight size={18} />
-          </a>
-        </div>
-      </section>
-
-      <footer className="bg-[#202A36] px-8 py-8 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm md:flex-row md:items-center md:justify-between">
-          <p className="font-semibold">Juma Saidi</p>
-          <p className="text-gray-400">Frontend Developer &amp; Designer</p>
-        </div>
-      </footer>
-    </div>
+    </main>
   );
 }
