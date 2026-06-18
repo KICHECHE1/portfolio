@@ -28,18 +28,23 @@ export function SiteFooter() {
               Connect
             </p>
             <div className="mt-4 grid gap-3 text-sm text-white/65">
-              <a href="#" className="inline-flex items-center gap-1 hover:text-white">
-                LinkedIn <ArrowUpRight size={13} />
+              <a
+                href="mailto:hello@jumasaidi.com"
+                className="inline-flex items-center gap-1 transition-colors duration-200 hover:text-white"
+              >
+                Email <ArrowUpRight size={13} />
               </a>
-              <a href="#" className="inline-flex items-center gap-1 hover:text-white">
-                GitHub <ArrowUpRight size={13} />
-              </a>
-              <Link href="/contact" className="hover:text-white">Contact</Link>
+              <Link
+                href="/contact"
+                className="transition-colors duration-200 hover:text-white"
+              >
+                Contact form
+              </Link>
             </div>
           </div>
         </div>
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/35 sm:flex-row sm:justify-between">
-          <p>© 2026 Juma Saidi. All rights reserved.</p>
+          <p>Copyright 2026 Juma Saidi. All rights reserved.</p>
           <p>Designed and developed with Next.js.</p>
         </div>
       </div>

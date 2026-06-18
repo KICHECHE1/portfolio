@@ -11,9 +11,9 @@ export type Project = {
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
+    <article className="group overflow-hidden rounded-xl border border-black/10 bg-white shadow-sm transition-[border-color,box-shadow] duration-200 hover:border-primary/30 hover:shadow-card">
       <div className={`${project.visual} relative aspect-[16/10] overflow-hidden p-5 sm:p-8`}>
-        <div className="project-screen mx-auto h-full max-w-3xl overflow-hidden rounded-xl border border-black/10 bg-white shadow-2xl transition-transform duration-500 group-hover:scale-[1.015]">
+        <div className="project-screen mx-auto h-full max-w-3xl overflow-hidden rounded-lg border border-black/10 bg-white shadow-xl">
           <div className="flex h-9 items-center gap-1.5 border-b border-black/10 bg-surface px-4">
             <span className="h-2 w-2 rounded-full bg-black/20" />
             <span className="h-2 w-2 rounded-full bg-black/20" />
@@ -40,7 +40,7 @@ export function ProjectCard({ project }: { project: Project }) {
               {project.title}
             </h2>
           </div>
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-black/10 text-ink transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-white">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-black/10 text-ink transition-colors duration-200 group-hover:border-accent group-hover:bg-accent group-hover:text-white">
             <ArrowUpRight size={17} />
           </span>
         </div>

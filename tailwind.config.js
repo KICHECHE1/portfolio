@@ -14,6 +14,12 @@ export default {
         subtle: "rgb(var(--color-subtle) / <alpha-value>)",
         surface: "rgb(var(--color-surface) / <alpha-value>)",
         portrait: "rgb(var(--color-portrait) / <alpha-value>)",
+        primary: "rgb(var(--color-primary) / <alpha-value>)",
+        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
+      },
+      fontFamily: {
+        heading: ["var(--font-heading)", "sans-serif"],
+        body: ["var(--font-body)", "sans-serif"],
       },
       boxShadow: {
         card: "0 18px 50px rgb(var(--color-ink) / 0.1)",

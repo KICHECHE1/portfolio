@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --color-accent: 37 99 235;
-  --color-accent-soft: 219 234 254;
-  --color-accent-ink: 30 58 138;
+  --color-accent: 180 83 9;
+  --color-accent-soft: 255 247 237;
+  --color-accent-ink: 146 64 14;
   --color-ink: 15 23 42;
-  --color-night: 15 23 42;
+  --color-night: 30 58 138;
+  --color-primary: 30 58 138;
+  --color-secondary: 30 64 175;
   --color-paper: 248 250 252;
   --color-muted: 100 116 139;
   --color-subtle: 148 163 184;
@@ -38,7 +40,17 @@ body {
   min-height: 100vh;
   background: rgb(var(--color-paper));
   color: rgb(var(--color-ink));
+  font-family: var(--font-body), sans-serif;
   text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
 }
 
 ::selection {
@@ -48,7 +60,17 @@ body {
 
 button,
 a {
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgb(var(--color-accent) / 0.35);
+  outline-offset: 3px;
 }
 
 .section-label {
@@ -65,6 +87,17 @@ a {
     linear-gradient(90deg, rgb(var(--color-white) / 0.035) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.metric-card {
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.metric-card:hover {
+  border-color: rgb(var(--color-primary) / 0.3);
+  box-shadow: 0 10px 24px rgb(var(--color-ink) / 0.07);
 }
 
 .professional-grid-light {

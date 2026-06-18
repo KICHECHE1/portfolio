@@ -34,10 +34,10 @@ export default function ContactPage() {
           <>
             Tell me about
             <br />
-            <span className="text-accent">your project.</span>
+            <span className="text-white/45">your project.</span>
           </>
         }
-        description="Share what you’re building, where you are in the process, and what success looks like. The more context you provide, the more useful my response can be."
+        description="Share what you are building, where you are in the process, and what success looks like. The more context you provide, the more useful my response can be."
         aside={
           <div className="mt-7 inline-flex items-center gap-3 rounded-full border border-white/15 px-4 py-2 text-sm text-white/60">
             <span className="relative flex h-2 w-2">
@@ -54,7 +54,7 @@ export default function ContactPage() {
           <aside>
             <Reveal>
               <p className="section-label">Contact details</p>
-              <h2 className="mt-6 text-4xl font-medium leading-tight tracking-[-0.045em] md:text-5xl">
+              <h2 className="mt-6 text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-5xl">
                 Let&apos;s start with a conversation.
               </h2>
               <p className="mt-6 max-w-md leading-7 text-muted">

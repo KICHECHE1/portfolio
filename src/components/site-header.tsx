@@ -29,7 +29,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b bg-ink text-white transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b bg-ink text-white transition-[border-color,box-shadow] duration-200 ${
         isScrolled
           ? "border-white/10 shadow-lg shadow-black/10"
           : "border-white/10"
@@ -63,7 +63,7 @@ export function SiteHeader() {
             >
               {label}
               {pathname === href && (
-                <span className="absolute inset-x-0 -bottom-1 mx-auto h-0.5 rounded-full bg-accent" />
+                <span className="absolute inset-x-0 -bottom-1 mx-auto h-0.5 rounded-full bg-white" />
               )}
             </Link>
           ))}
@@ -71,7 +71,7 @@ export function SiteHeader() {
 
         <Link
           href="/contact"
-          className="hidden items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-blue-50 md:inline-flex"
+          className="hidden items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-ink md:inline-flex"
         >
           Start a project <ArrowUpRight size={15} />
         </Link>
@@ -90,7 +90,7 @@ export function SiteHeader() {
 
       <div
         id="mobile-navigation"
-        className={`overflow-hidden border-t border-white/10 bg-ink transition-all duration-300 md:hidden ${
+        className={`overflow-hidden border-t border-white/10 bg-ink transition-[max-height,opacity] duration-200 md:hidden ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
