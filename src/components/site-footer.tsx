@@ -1,51 +1,36 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { siteNavigation } from "@/lib/site-navigation";
+import { contactDetails } from "@/lib/contact-details";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-ink px-5 py-12 text-white md:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_0.7fr_0.7fr]">
+    <footer className="border-t border-border bg-secondary/35 py-12 md:py-14">
+      <div className="site-container">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.7fr_1fr] lg:gap-16">
           <div>
-            <p className="text-xl font-semibold">Juma Saidi</p>
-            <p className="mt-3 max-w-sm text-sm leading-6 text-white/55">
-              Frontend developer and designer building professional, accessible
-              digital experiences.
-            </p>
+            <Link href="/" className="inline-flex min-h-11 items-center rounded-md font-heading text-lg font-semibold tracking-tight">Juma Saidi<span className="text-primary">.</span></Link>
+            <p className="mt-3 max-w-xs text-sm leading-7 text-muted-foreground">Curious about what&apos;s possible.<br />Focused on making it useful.</p>
+            <p className="mt-5 font-mono text-[11px] text-muted-foreground">Software developer / Nairobi, Kenya</p>
           </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/35">
-              Navigate
-            </p>
-            <div className="mt-4 grid gap-3 text-sm text-white/65">
-              <Link href="/about" className="hover:text-white">About</Link>
-              <Link href="/work" className="hover:text-white">Work</Link>
-              <Link href="/skills" className="hover:text-white">Skills</Link>
+          <nav aria-label="Footer navigation">
+            <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">Explore</p>
+            <div className="mt-3 grid grid-cols-2 gap-x-4 sm:grid-cols-1">
+              {siteNavigation.map(({ label, href }) => <Link href={href} key={href} className="inline-flex min-h-11 w-fit items-center rounded-md text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-accent hover:underline">{label}</Link>)}
+              <Link href="/skills" className="inline-flex min-h-11 w-fit items-center rounded-md text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-accent hover:underline">Skills</Link>
             </div>
-          </div>
+          </nav>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/35">
-              Connect
-            </p>
-            <div className="mt-4 grid gap-3 text-sm text-white/65">
-              <a
-                href="mailto:hello@jumasaidi.com"
-                className="inline-flex items-center gap-1 transition-colors duration-200 hover:text-white"
-              >
-                Email <ArrowUpRight size={13} />
-              </a>
-              <Link
-                href="/contact"
-                className="transition-colors duration-200 hover:text-white"
-              >
-                Contact form
-              </Link>
+            <p className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">Start a conversation</p>
+            <div className="mt-3 grid">
+              <Link href="/contact" className="inline-flex min-h-11 w-fit items-center gap-2 rounded-md text-sm text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline">Get in touch <ArrowUpRight size={15} aria-hidden="true" /></Link>
+              <a href={`mailto:${contactDetails.email}`} className="inline-flex min-h-11 w-fit items-center rounded-md text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-accent hover:underline">{contactDetails.email}</a>
             </div>
           </div>
         </div>
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/35 sm:flex-row sm:justify-between">
-          <p>Copyright 2026 Juma Saidi. All rights reserved.</p>
-          <p>Designed and developed with Next.js.</p>
+        <div className="mt-10 flex flex-col justify-between gap-3 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center">
+          <p>© {new Date().getFullYear()} Juma Saidi.</p>
+          <a href="#main-content" className="inline-flex min-h-11 w-fit items-center gap-2 rounded-md transition-colors hover:text-accent">Back to top <ArrowUp size={14} aria-hidden="true" /></a>
         </div>
       </div>
     </footer>

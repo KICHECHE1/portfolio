@@ -1,339 +1,105 @@
 import type { Metadata } from "next";
-import {
-  ArrowUpRight,
-  CheckCircle2,
-  Clock3,
-  Globe2,
-  Mail,
-  MessageSquareText,
-} from "lucide-react";
-import { PageHero } from "@/components/page-hero";
+import Link from "next/link";
+import { connection } from "next/server";
+import { ArrowRight, ArrowUpRight, Github, Linkedin, Link as LinkIcon, Mail } from "lucide-react";
+import { ContactForm } from "@/components/contact/contact-form";
 import { Reveal } from "@/components/reveal";
+import { contactDetails } from "@/lib/contact-details";
+import { getContactDeliveryConfig } from "@/lib/contact/server";
+
+const description = "Connect with Juma Saidi about software development, collaborative opportunities, and meaningful digital projects.";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description:
-    "Contact Juma Saidi about frontend development, website design, and digital product projects.",
+  description,
+  openGraph: { title: "Contact Juma Saidi | Let's Connect", description, type: "website" },
 };
 
-const projectTypes = [
-  "Website design",
-  "Frontend development",
-  "Design and development",
-  "Portfolio website",
-  "Landing page",
-  "Something else",
-];
+const professionalProfiles = [
+  { label: "LinkedIn", href: contactDetails.profiles.linkedin, icon: Linkedin },
+  { label: "GitHub", href: contactDetails.profiles.github, icon: Github },
+  ...contactDetails.otherProfiles.map((profile) => ({ ...profile, icon: LinkIcon })),
+].filter((profile) => profile.href);
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  // Read delivery readiness at request time, including when configuration is
+  // supplied by the hosting environment after the production build.
+  await connection();
+  const deliveryAvailable = Boolean(getContactDeliveryConfig());
+
   return (
-    <main className="bg-paper text-ink">
-      <PageHero
-        eyebrow="Contact / 04"
-        title={
-          <>
-            Tell me about
-            <br />
-            <span className="text-white/45">your project.</span>
-          </>
-        }
-        description="Share what you are building, where you are in the process, and what success looks like. The more context you provide, the more useful my response can be."
-        aside={
-          <div className="mt-7 inline-flex items-center gap-3 rounded-full border border-white/15 px-4 py-2 text-sm text-white/60">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
-              <span className="relative h-2 w-2 rounded-full bg-accent" />
-            </span>
-            Currently accepting new projects
-          </div>
-        }
-      />
-
-      <section className="px-5 py-20 md:px-8 md:py-32">
-        <div className="mx-auto grid max-w-7xl gap-12 xl:grid-cols-[0.7fr_1.3fr] xl:gap-20">
-          <aside>
-            <Reveal>
-              <p className="section-label">Contact details</p>
-              <h2 className="mt-6 text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-5xl">
-                Let&apos;s start with a conversation.
-              </h2>
-              <p className="mt-6 max-w-md leading-7 text-muted">
-                Whether you have a detailed brief or an early idea, send over
-                what you know. I&apos;ll help clarify the next step.
-              </p>
-
-              <div className="mt-10 overflow-hidden rounded-xl border border-black/10 bg-white">
-                <a
-                  href="mailto:hello@jumasaidi.com"
-                  className="group flex items-center gap-4 border-b border-black/10 p-5 transition-colors hover:bg-accent/25"
-                >
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-ink text-white">
-                    <Mail size={18} />
-                  </span>
-                  <span>
-                    <span className="block text-xs uppercase tracking-wider text-muted">
-                      Email
-                    </span>
-                    <span className="mt-1 block font-semibold">
-                      hello@jumasaidi.com
-                    </span>
-                  </span>
-                  <ArrowUpRight
-                    size={17}
-                    className="ml-auto transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                </a>
-
-                <div className="flex items-center gap-4 border-b border-black/10 p-5">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-surface">
-                    <Globe2 size={18} />
-                  </span>
-                  <span>
-                    <span className="block text-xs uppercase tracking-wider text-muted">
-                      Location
-                    </span>
-                    <span className="mt-1 block font-semibold">
-                      Nairobi, Kenya · Remote worldwide
-                    </span>
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-4 p-5">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-surface">
-                    <Clock3 size={18} />
-                  </span>
-                  <span>
-                    <span className="block text-xs uppercase tracking-wider text-muted">
-                      Response time
-                    </span>
-                    <span className="mt-1 block font-semibold">
-                      Within 1–2 business days
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={100}>
-              <div className="mt-8 rounded-xl border border-blue-200 bg-accent-soft p-6 text-accent-ink">
-                <MessageSquareText size={24} className="text-accent" />
-                <h3 className="mt-8 text-xl font-semibold">
-                  What happens next?
-                </h3>
-                <ol className="mt-5 space-y-4">
-                  {[
-                    "I review your project details.",
-                    "We schedule a short discovery call.",
-                    "You receive a clear scope and proposal.",
-                  ].map((step, index) => (
-                    <li key={step} className="flex gap-3 text-sm leading-6">
-                      <span className="font-semibold">0{index + 1}</span>
-                      <span>{step}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </Reveal>
-          </aside>
-
-          <Reveal delay={100}>
-            <form
-              action="mailto:hello@jumasaidi.com"
-              method="post"
-              encType="text/plain"
-              className="rounded-2xl border border-black/10 bg-white p-6 shadow-card sm:p-8 md:p-12"
-            >
-              <div className="mb-10 flex items-start justify-between gap-5 border-b border-black/10 pb-8">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                    Project inquiry
-                  </p>
-                  <h2 className="mt-3 text-3xl font-medium tracking-[-0.035em]">
-                    Tell me the essentials
-                  </h2>
-                </div>
-                <span className="hidden rounded-full bg-accent-soft px-3 py-1.5 text-xs font-semibold text-accent-ink sm:block">
-                  Usually 3–5 minutes
-                </span>
-              </div>
-
-              <fieldset>
-                <legend className="mb-6 flex items-center gap-3 text-sm font-semibold">
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-ink text-xs text-white">
-                    1
-                  </span>
-                  Your details
-                </legend>
-                <div className="grid gap-7 sm:grid-cols-2">
-                  <label className="form-field">
-                    <span>Full name *</span>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Jane Smith"
-                      autoComplete="name"
-                      required
-                    />
-                  </label>
-                  <label className="form-field">
-                    <span>Email address *</span>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="jane@company.com"
-                      autoComplete="email"
-                      required
-                    />
-                  </label>
-                  <label className="form-field">
-                    <span>Company or brand</span>
-                    <input
-                      type="text"
-                      name="company"
-                      placeholder="Company name"
-                      autoComplete="organization"
-                    />
-                  </label>
-                  <label className="form-field">
-                    <span>Phone number</span>
-                    <input
-                      type="tel"
-                      name="phone"
-                      placeholder="+254 ..."
-                      autoComplete="tel"
-                    />
-                  </label>
-                </div>
-              </fieldset>
-
-              <fieldset className="mt-12 border-t border-black/10 pt-10">
-                <legend className="mb-6 flex items-center gap-3 text-sm font-semibold">
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-ink text-xs text-white">
-                    2
-                  </span>
-                  Project overview
-                </legend>
-
-                <div>
-                  <p className="mb-4 text-xs font-semibold uppercase tracking-[0.08em] text-muted">
-                    What do you need? *
-                  </p>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    {projectTypes.map((type) => (
-                      <label
-                        key={type}
-                        className="project-option cursor-pointer"
-                      >
-                        <input
-                          type="radio"
-                          name="project-type"
-                          value={type}
-                          required
-                        />
-                        <span>{type}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-8 grid gap-7 sm:grid-cols-2">
-                  <label className="form-field">
-                    <span>Estimated budget *</span>
-                    <select name="budget" defaultValue="" required>
-                      <option value="" disabled>
-                        Select a range
-                      </option>
-                      <option>Under $1,000</option>
-                      <option>$1,000 – $3,000</option>
-                      <option>$3,000 – $7,000</option>
-                      <option>$7,000+</option>
-                      <option>Not sure yet</option>
-                    </select>
-                  </label>
-                  <label className="form-field">
-                    <span>Ideal launch date</span>
-                    <select name="timeline" defaultValue="">
-                      <option value="" disabled>
-                        Select a timeline
-                      </option>
-                      <option>As soon as possible</option>
-                      <option>Within 1 month</option>
-                      <option>Within 2–3 months</option>
-                      <option>3+ months</option>
-                      <option>Flexible / not sure</option>
-                    </select>
-                  </label>
-                </div>
-
-                <label className="form-field mt-8">
-                  <span>Project details *</span>
-                  <textarea
-                    name="message"
-                    rows={6}
-                    placeholder="Tell me about your goals, audience, required features, current challenges, and what a successful result would look like."
-                    required
-                  />
-                </label>
-
-                <label className="form-field mt-8">
-                  <span>Existing website or reference link</span>
-                  <input
-                    type="url"
-                    name="reference"
-                    placeholder="https://"
-                  />
-                </label>
-              </fieldset>
-
-              <div className="mt-10 flex flex-col gap-5 border-t border-black/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-                <p className="flex max-w-sm gap-2 text-xs leading-5 text-muted">
-                  <CheckCircle2 size={15} className="mt-0.5 shrink-0" />
-                  Your information will only be used to respond to this
-                  inquiry.
-                </p>
-                <button
-                  type="submit"
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent hover:text-ink"
-                >
-                  Send project inquiry
-                  <ArrowUpRight
-                    size={17}
-                    className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                  />
-                </button>
-              </div>
-            </form>
+    <main id="main-content">
+      <section className="border-b border-border pb-14 pt-32 md:pb-20 md:pt-40" aria-labelledby="contact-title">
+        <div className="site-container">
+          <Reveal>
+            <p className="section-label mb-7 flex items-center gap-3">
+              <span className="h-px w-7 bg-primary" aria-hidden="true" />Let&apos;s connect
+            </p>
+            <h1 id="contact-title" className="max-w-5xl font-heading text-[clamp(2.25rem,5.1vw,4.5rem)] font-semibold leading-[1.08] tracking-[-0.055em] lg:text-[clamp(4rem,5vw,4.5rem)]">
+              <span className="block">Great ideas start</span>{" "}
+              <span className="block text-primary">with a conversation.</span>
+            </h1>
+            <p className="mt-7 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">
+              Whether you have a project in mind, an opportunity to collaborate, or simply want to connect, I&apos;d love to hear from you.
+            </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="border-t border-black/10 px-5 py-20 md:px-8 md:py-28">
-        <div className="mx-auto max-w-7xl">
+      <section className="py-14 md:py-24" aria-label="Get in touch">
+        <div className="site-container grid items-start gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] lg:gap-20">
           <Reveal>
-            <p className="section-label">Before you send</p>
-            <div className="mt-10 grid gap-5 md:grid-cols-3">
-              {[
-                [
-                  "What projects are a good fit?",
-                  "Marketing sites, portfolios, landing pages, frontend builds, and focused digital product experiences.",
-                ],
-                [
-                  "Can you work with an existing design?",
-                  "Yes. I can develop from supplied designs, improve an existing direction, or handle both design and development.",
-                ],
-                [
-                  "Do you work remotely?",
-                  "Yes. I’m based in Nairobi and collaborate remotely with clients and teams in different time zones.",
-                ],
-              ].map(([question, answer]) => (
-                <article key={question} className="rounded-xl border border-black/10 bg-white p-7">
-                  <h2 className="font-semibold">{question}</h2>
-                  <p className="mt-4 text-sm leading-6 text-muted">
-                    {answer}
-                  </p>
-                </article>
-              ))}
+            <h2 className="font-heading text-3xl font-semibold tracking-[-0.04em] md:text-4xl">Let&apos;s Talk.</h2>
+            <p className="mt-5 max-w-md text-base leading-8 text-muted-foreground">
+              I&apos;m always interested in meaningful projects, collaborative opportunities, and conversations around technology and innovation.
+            </p>
+            <div className="mt-8 border-y border-border">
+              <a href={`mailto:${contactDetails.email}`} className="group flex min-h-24 items-center gap-4 rounded-sm py-5 transition-colors hover:text-accent">
+                <Mail size={20} strokeWidth={1.5} className="shrink-0 text-accent" aria-hidden="true" />
+                <span className="min-w-0 flex-1">
+                  <span className="block font-mono text-[11px] uppercase tracking-wider text-muted-foreground">Email me directly</span>
+                  <span className="mt-1.5 block break-words text-base font-medium sm:text-lg">{contactDetails.email}</span>
+                </span>
+                <ArrowUpRight size={18} className="shrink-0 text-muted-foreground transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent motion-reduce:transform-none" aria-hidden="true" />
+              </a>
             </div>
+            {professionalProfiles.length > 0 && (
+              <nav aria-label="Professional profiles" className="mt-5 flex flex-wrap gap-x-6 gap-y-1">
+                {professionalProfiles.map(({ label, href, icon: Icon }) => (
+                  <a key={href} href={href!} target="_blank" rel="noopener noreferrer" className="group inline-flex min-h-11 items-center gap-2 rounded-md text-sm text-muted-foreground transition-colors hover:text-accent">
+                    <Icon size={17} strokeWidth={1.5} aria-hidden="true" />{label}<ArrowUpRight size={14} aria-hidden="true" />
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ))}
+              </nav>
+            )}
+            <p className="mt-8 max-w-sm text-sm leading-7 text-muted-foreground">
+              A starting point, a question, or an idea you&apos;re still figuring out. There&apos;s room for all of it.
+            </p>
+          </Reveal>
+          <Reveal delay={70} className="min-w-0">
+            <ContactForm deliveryAvailable={deliveryAvailable} email={contactDetails.email} />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-secondary/40 py-14 md:py-20" aria-labelledby="connections-title">
+        <div className="site-container grid gap-7 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] lg:gap-20">
+          <Reveal><p className="section-label lg:pt-2">Open to connections</p></Reveal>
+          <Reveal delay={50}>
+            <h2 id="connections-title" className="max-w-xl font-heading text-[clamp(1.75rem,3.2vw,2.5rem)] font-semibold leading-tight tracking-[-0.04em]">Always open to meaningful opportunities.</h2>
+            <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">I&apos;m interested in collaborating with teams, exploring new technologies, and contributing to projects that solve real-world problems.</p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24" aria-labelledby="conversation-title">
+        <div className="site-container">
+          <Reveal className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end lg:gap-12">
+            <h2 id="conversation-title" className="max-w-2xl font-heading text-3xl font-medium leading-tight tracking-[-0.045em] md:text-[2.5rem]">Good conversations lead to <span className="text-primary">great possibilities.</span></h2>
+            <Link href="/work" className="group inline-flex min-h-11 shrink-0 items-center gap-3 rounded-md text-sm font-medium text-accent underline-offset-4 transition-colors hover:underline">
+              Explore My Work<ArrowRight size={17} className="transition-transform group-hover:translate-x-1 motion-reduce:transform-none" aria-hidden="true" />
+            </Link>
           </Reveal>
         </div>
       </section>

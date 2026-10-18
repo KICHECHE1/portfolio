@@ -1,42 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import type { ReactNode } from "react";
 
-export function Reveal({
-  children,
-  className = "",
-  delay = 0,
-}: {
+export function Reveal({ children, className = "", delay = 0 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.12 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
+  const reduceMotion = useReducedMotion();
   return (
-    <div
-      ref={ref}
-      className={`reveal ${isVisible ? "is-visible" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <motion.div
+      className={`reveal ${className}`}
+      // Keep the server and first client render identical. The reduced-motion
+      // CSS makes content immediately visible without waiting for hydration.
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : delay / 1000, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
