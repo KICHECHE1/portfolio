@@ -1,6 +1,7 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
+import { PersonalPortrait } from "@/components/personal-portrait";
 import { Button } from "@/components/ui/button";
 import { collaborationSteps, principles, toolkit } from "@/lib/home-data";
 
@@ -10,9 +11,7 @@ export function AboutPreview() {
       <Reveal>
         <p className="section-label">01 / Beyond the code</p>
         <h2 id="about-preview-title" className="section-title mt-4 max-w-sm">More Than<br className="hidden lg:block" /> Just Code.</h2>
-        <div className="mt-8 flex max-w-52 items-center gap-3 font-mono text-[10px] text-muted-foreground" aria-hidden="true">
-          <span className="size-2 rounded-full border border-primary" /><span className="h-px flex-1 bg-border" /><span>Curiosity → Clarity</span>
-        </div>
+        <PersonalPortrait className="mt-8 lg:max-w-64" sizes="(max-width: 639px) 144px, (max-width: 1023px) 176px, 256px" />
       </Reveal>
       <Reveal delay={60} className="flex flex-col justify-center">
         <p className="max-w-2xl text-lg leading-9 text-muted-foreground">For me, software development is about understanding challenges, exploring possibilities, and creating solutions that genuinely improve how people and organizations work. I value curiosity, collaboration, adaptability, and continuous growth.</p>

@@ -15,7 +15,8 @@ Use the homepage's editorial style, shared semantic dark/light palette, and loca
 
 ## Sources of truth
 
-- src/lib/about-data.ts contains the supplied biography, principles, experience areas, education, interests, and optional portrait.
+- src/lib/about-data.ts contains the supplied biography, principles, experience areas, education, and interests.
+- src/lib/personal-profile.ts holds the portrait shared with Home.
 - src/lib/projects.ts remains authoritative for linked project names and routes.
 - src/components/about/about-hero.tsx handles the introduction and portrait presentation.
 - src/components/about/about-sections.tsx handles the editorial sections.
@@ -23,7 +24,7 @@ Use the homepage's editorial style, shared semantic dark/light palette, and loca
 
 ## Portrait
 
-No confirmed personal photograph is available. Present a visibly labeled portrait placeholder. Do not use stock imagery, generated faces, or another person's photograph. To add a real approved image later, set personalPortrait in the About configuration. The component uses Next.js Image, a reserved aspect ratio, descriptive alt text, and responsive image sizes.
+Use the owner's photograph from src/assets/Juma.jpeg in the About hero and the homepage's About preview. The shared PersonalPortrait component uses Next.js Image, a reserved aspect ratio, descriptive alt text, responsive image sizes, and a blur placeholder for static imports. A single personalPortrait setting in src/lib/personal-profile.ts supplies both pages. Preserve the original photograph; do not substitute generated faces or stock imagery.
 
 ## Truthful attribution
 

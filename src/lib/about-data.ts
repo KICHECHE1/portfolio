@@ -59,12 +59,3 @@ export const technicalInterests = [
 
 export const philosophyDescription = "I believe meaningful progress comes from staying curious, embracing challenges, and being willing to learn. Whether I'm contributing to a complex software platform or exploring a new technology, I approach every opportunity with the intention to grow and create something useful.";
 
-export interface PersonalPortrait {
-  /** A local image path, or a static image import's .src value. */
-  src: string;
-  alt: string;
-}
-
-// Add only a real, approved photograph of Juma. Until then the hero presents
-// an explicit portrait placeholder, without substituting another person's face.
-export const personalPortrait: PersonalPortrait | null = null;

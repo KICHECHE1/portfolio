@@ -23,6 +23,7 @@ Avoid code-window heroes, generic developer illustrations, service cards, contin
 - src/components/home/home-sections.tsx: about, principles, toolkit, collaboration, closing CTA.
 - src/lib/home-data.ts: owner-supplied values and tools, plus homepage project display categories.
 - src/lib/projects.ts remains authoritative for project names, descriptions, screenshots, attribution, and live URLs.
+- The About preview reuses PersonalPortrait and the owner's photograph from src/assets/Juma.jpeg, configured centrally in src/lib/personal-profile.ts. Keep the existing typography-led hero and use the portrait as the personal introduction to the About preview.
 
 ## Shared navigation and footer
 

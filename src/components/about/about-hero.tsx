@@ -1,31 +1,7 @@
-import { ArrowDown, Camera } from "lucide-react";
-import Image from "next/image";
+import { ArrowDown } from "lucide-react";
 import { Reveal } from "@/components/reveal";
-import { aboutIntroduction, personalPortrait } from "@/lib/about-data";
-import { cn } from "@/lib/utils";
-
-function PersonalPortrait() {
-  return (
-    <figure className="flex items-end gap-5 sm:gap-8 lg:block">
-      <div className={cn("relative aspect-[4/5] w-36 shrink-0 overflow-hidden rounded-2xl border border-border bg-secondary/50 sm:w-44 lg:w-full", !personalPortrait && "border-dashed")}>
-        {personalPortrait ? (
-          <Image src={personalPortrait.src} alt={personalPortrait.alt} fill preload
-            sizes="(max-width: 639px) 144px, (max-width: 1023px) 176px, 320px" className="object-cover" />
-        ) : (
-          <div role="img" aria-label="Personal photograph placeholder. A portrait of Juma Saidi has not been added."
-            className="flex h-full flex-col items-center justify-center gap-3 px-3 text-center text-muted-foreground">
-            <Camera size={20} strokeWidth={1.4} className="text-accent" aria-hidden="true" />
-            <p className="text-xs leading-6">Personal photograph<span className="block font-mono text-[10px]">To be added</span></p>
-          </div>
-        )}
-      </div>
-      <figcaption className="min-w-0 pb-1 lg:mt-5 lg:pb-0">
-        <p className="font-heading text-base font-semibold tracking-tight">Juma Saidi</p>
-        <p className="mt-1 text-sm leading-6 text-muted-foreground">Software Developer</p>
-      </figcaption>
-    </figure>
-  );
-}
+import { PersonalPortrait } from "@/components/personal-portrait";
+import { aboutIntroduction } from "@/lib/about-data";
 
 export function AboutHero() {
   return (
@@ -40,7 +16,7 @@ export function AboutHero() {
           <p className="mt-7 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">{aboutIntroduction}</p>
           <a href="#journey" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-medium text-accent underline-offset-4 transition-colors hover:underline">Read my story <ArrowDown size={15} aria-hidden="true" /></a>
         </Reveal>
-        <Reveal delay={70} className="min-w-0 lg:pl-2"><PersonalPortrait /></Reveal>
+        <Reveal delay={70} className="min-w-0 lg:pl-2"><PersonalPortrait preload /></Reveal>
       </div>
     </section>
   );
