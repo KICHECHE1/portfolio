@@ -19,7 +19,7 @@ export function ThemeToggle() {
       type="button"
       variant="outline"
       size="icon"
-      className="theme-toggle relative shrink-0"
+      className="theme-toggle relative shrink-0 rounded-full bg-secondary/50 shadow-none"
       disabled={!mounted}
       aria-label={mounted ? `Switch to ${nextTheme} theme` : "Switch color theme"}
       title={mounted ? `Switch to ${nextTheme} theme` : "Switch color theme"}
